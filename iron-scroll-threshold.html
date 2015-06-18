@@ -135,12 +135,9 @@ Fired when `lowerTriggered` becomes `true`.
 
     ready: function() {
       this._boundScrollHandler = this.checkThreshold.bind(this);
-      console.log(this._boundScrollHandler);
-      console.log(this._scrollTarget);
     },
 
     detached: function() {
-      console.log("test");
       // Remove listener for any previous scroll target
       if (this._scrollTarget) {
         this._scrollTarget.removeEventListener('scroll', this._boundScrollHandler);
@@ -148,9 +145,6 @@ Fired when `lowerTriggered` becomes `true`.
     },
 
     setup: function() {
-
-      console.log(this._scrollTarget);
-
       var target = this.scrollTarget || this;
 
       // Remove listener for any previous scroll target
@@ -183,7 +177,6 @@ Fired when `lowerTriggered` becomes `true`.
     },
 
     checkThreshold: function(e) {
-      console.log("checking threshold");
       var top = this._scrollTarget[this.scrollPosition];
       if (!this.upperTriggered && this.upperThreshold !== null) {
         if (top < this.upperThreshold) {
@@ -221,7 +214,6 @@ Fired when `lowerTriggered` becomes `true`.
      * @method clearUpper
      */
     clearUpper: function(waitForMutation) {
-      console.log("test");
       if (waitForMutation) {
         this._waitForMutation(function() {
           this.clearUpper();
@@ -240,7 +232,6 @@ Fired when `lowerTriggered` becomes `true`.
      * @method clearLower
      */
     clearLower: function(waitForMutation) {
-      console.log("test");
       if (waitForMutation) {
         this._waitForMutation(function() {
           this.clearLower();
@@ -254,7 +245,6 @@ Fired when `lowerTriggered` becomes `true`.
     },
 
     _waitForMutation: function(listener) {
-      console.log("test");
       var observer = new MutationObserver(function(mutations) {
         listener.call(this, observer, mutations);
         observer.disconnect();
