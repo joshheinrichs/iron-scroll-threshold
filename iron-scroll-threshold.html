@@ -169,10 +169,10 @@ Fired when `lowerTriggered` becomes `true`.
 
       // Clear trigger state if user has cleared the threshold
       if (!this.upperThreshold) {
-        this.upperTriggered = false;
+        this._setUpperTriggered(false);
       }
       if (!this.lowerThreshold) {
-        this.lowerTriggered = false;
+        this._setLowerTriggered(false);
       }
     },
 
@@ -187,7 +187,7 @@ Fired when `lowerTriggered` becomes `true`.
             this._scrollTarget.removeEventListener('scroll', this._boundScrollHandler);
           }
 
-          this.upperTriggered = true;
+          this._setUpperTriggered(true);
           this.fire('upper-trigger');
         }
       }
@@ -202,7 +202,7 @@ Fired when `lowerTriggered` becomes `true`.
             this._scrollTarget.removeEventListener('scroll', this._boundScrollHandler);
           }
 
-          this.lowerTriggered = true;
+          this._setLowerTriggered(true);
           this.fire('lower-trigger');
         }
       }
@@ -220,7 +220,7 @@ Fired when `lowerTriggered` becomes `true`.
         }.bind(this));
       } else {
         this.async(function() {
-          this.upperTriggered = false;
+          this._setUpperTriggered(false);
           this._scrollTarget.addEventListener('scroll', this._boundScrollHandler);
         });
       }
@@ -238,7 +238,7 @@ Fired when `lowerTriggered` becomes `true`.
         }.bind(this));
       } else {
         this.async(function() {
-          this.lowerTriggered = false;
+          this._setLowerTriggered(false);
           this._scrollTarget.addEventListener('scroll', this._boundScrollHandler);
         });
       }
