@@ -15,7 +15,6 @@
   "main": [
     "iron-interval-behavior.html"
   ],
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/Decateron/iron-scroll-threshold.git"
