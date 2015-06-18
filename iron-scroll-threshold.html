@@ -8,7 +8,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <!--
-`core-scroll-threshold` is a utility element that listens for `scroll` events from a
+`iron-scroll-threshold` is a utility element that listens for `scroll` events from a
 scrollable region and fires events to indicate when the scroller has reached a pre-defined
 limit, specified in pixels from the upper and lower bounds of the scrollable region.
 
@@ -30,9 +30,9 @@ triggered property.
 
 Example:
 
-    <core-scroll-threshold id="threshold" lowerThreshold="500"
+    <iron-scroll-threshold id="threshold" lowerThreshold="500"
       on-lower-trigger="{{loadMore}}" lowerTriggered="{{spinnerShouldShow}}">
-    </core-scroll-threshold>
+    </iron-scroll-threshold>
 
     ...
 
@@ -43,7 +43,7 @@ Example:
     }
 
 @group Polymer Core Elements
-@element core-scroll-threshold
+@element iron-scroll-threshold
 @homepage github.io
 -->
 
@@ -60,7 +60,7 @@ Fired when `lowerTriggered` becomes `true`.
 
 <link rel="import" href="../polymer/polymer.html">
 
-<polymer-element name="core-scroll-threshold">
+<polymer-element name="iron-scroll-threshold">
 
 <script>
 
