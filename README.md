@@ -1,4 +1,4 @@
 iron-scroll-threshold
 =========
 
-See the [component page](https://www.polymer-project.org/0.5/docs/elements/core-scroll-threshold.html) for more information.
+This is a port of the [core-scroll-threshold](https://github.com/Polymer/core-scroll-threshold) web component to Polymer 1.0.
