@@ -1,11 +1,11 @@
 <!--
-    @license
-    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-    Code distributed by Google as part of the polymer project is also
-    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <!doctype html>
 <html>
@@ -15,59 +15,77 @@
 
   <script src="../webcomponentsjs/webcomponents.js"></script>
 
+  <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="iron-scroll-threshold.html">
 
-  <style>
-    #scroller {
-      height: 300px;
-      border: 1px solid red;
-      padding: 20px;
-      overflow: auto;
-    }
-    .thing {
-      padding: 10px;
-      margin: 10px;
-      background: lightblue;
-      border-radius: 10px;
-      font-size: 2em;
-    }
-  </style>
-
 </head>
-<body unresolved>
+<body>
+  <dom-module id='x-lazyload'>
 
-<template is="auto-binding">
-  <iron-scroll-threshold id="threshold" scrollTarget="{{$.scroller}}" lowerThreshold="100" on-lower-trigger="{{loadMore}}" fit></iron-scroll-threshold>
-  <div id="scroller" fit>
-    <template repeat="{{i in data}}">
-      <div class="thing">{{i}}</div>
+    <style>
+      #scroller {
+        height: 300px;
+        border: 1px solid red;
+        padding: 20px;
+        overflow: auto;
+      }
+      .thing {
+        padding: 10px;
+        margin: 10px;
+        background: lightblue;
+        border-radius: 10px;
+        font-size: 2em;
+      }
+    </style>
+
+    <template>
+
+      <iron-scroll-threshold id="threshold" lower-threshold="1" on-lower-trigger="loadMore" lower-triggered="{{lowerTriggered}}" fit></iron-scroll-threshold>
+
+      <div id="scroller" class="vertical layout center" fill>
+
+        <template is="dom-repeat" items="{{items}}">
+          <div class="thing">{{item}}</div>
+        </template> 
+
+        <div hidden?="{{!lowerTriggered}}">Please wait...</div>
+      </div>
+
     </template>
-    <div hidden?="{{!$.threshold.lowerTriggered}}">Please wait...</div>
-  </div>
-</template>
+  </dom-module>
 
-<script>
+  <script>
+    Polymer({
+      is:'x-lazyload',
 
-  addEventListener('template-bound', function(e) {
+      properties: {
+        items: {
+          type: Array, 
+          value: []
+        },
+      },
 
-    var scope = e.target;
-    var n;
-    scope.data = [];
-    for (n=0; n<20; n++) {
-      scope.data.push(n);
-    }
-    scope.loadMore = function() {
-      setTimeout(function() {
-        for (var i=n; i<n+10; i++) {
-          scope.data.push(i);
+      ready: function() {
+        this.$.threshold.scrollTarget = this.$.scroller;
+        for (n=0; n<20; n++) {
+          this.push('items', n);
         }
-        n = i;
-        scope.$.threshold.clearLower();
-      }, 1000);
-    };
-  });
+      },
 
-</script>
+      loadMore: function() {
+        var scope = this;
+        setTimeout(function() {
+          for (var i=n; i<n+10; i++) {
+            scope.push('items', i);
+          }
+          n = i;
+          scope.$.threshold.clearLower();
+        }, 1000);
+      }
+    });
+  </script>
 
+  <x-lazyload></x-lazyload>
+  
 </body>
 </html>
