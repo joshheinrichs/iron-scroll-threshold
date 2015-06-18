@@ -1,6 +1,6 @@
 {
   "name": "iron-scroll-threshold",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "http://polymer.github.io/LICENSE.txt",
   "description": "Polymer element for triggering an event when nearing the beginning or end of a scrollable element",
   "authors": [
@@ -19,6 +19,7 @@
     "type": "git",
     "url": "git://github.com/Decateron/iron-scroll-threshold.git"
   },
+  "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#~1.0.3"
   },
